@@ -39,6 +39,13 @@ intial()
 
 
 
+app.get('/',(req,res)=>{
+    res.send("Working!")
+})
+
+
+
+
 app.post('/common/history',async(req,res)=>{
     try{const {_id,minday,minmon,minyear,maxday,maxmon,maxyear} = req.body
     const low = moment({ 
