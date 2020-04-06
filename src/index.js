@@ -108,6 +108,50 @@ app.post('/logout',async(req,res)=>{
 
 // admin API
 
+
+app.post('/database/mecha',async(req,res) =>{
+     try{await mecha.remove()
+     res.send("Ok!")}catch(e){res.status(500).send("invalid request")}
+})
+
+
+
+
+app.post('/database/cust',async(req,res)=>{
+    try{await cust.remove()
+    res.send("Ok!")}catch(e){res.status(500).send("invalid request")}
+})
+
+
+
+
+app.post('/database/orgamecha',async(req,res)=>{
+    try{await orgamecha.remove()
+    res.send("Ok!")}catch(e){res.status(500).send("invalid request")}
+})
+
+
+
+
+
+app.post('/database/txn',async(req,res)=>{
+    try{await txn.remove()
+    res.send("Ok!")}catch(e){res.status(500).send("invalid request")}
+})
+
+
+
+
+app.post('/database/history',async(req,res)=>{
+    try{await history.remove()
+    res.send("Ok!")}catch(e){res.status(500).send("invalid request")}
+})
+
+
+
+
+
+
 app.post('/changeprice',(req,res)=>{
     try{price[0] = req.body.single
     price[1] = req.body.many
