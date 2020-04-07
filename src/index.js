@@ -46,8 +46,8 @@ app.get('/',(req,res)=>{
 
 
 
-app.post('/common/history',async(req,res)=>{
-    try{const {_id,minday,minmon,minyear,maxday,maxmon,maxyear} = req.body
+app.post('/history',async(req,res)=>{
+    try{const {type,_id,typetime,minday,minmon,minyear,maxday,maxmon,maxyear} = req.body
     const low = moment({ 
         year :minyear, month :(minmon-1), day :minday
     }).valueOf()
@@ -55,7 +55,7 @@ app.post('/common/history',async(req,res)=>{
         year :maxyear, month :(maxmon-1), day :maxday, 
         hour :23, minute :59
     }).valueOf()
-    const History =await history.find({custid:_id,requesttime:{"$gte": low, "$lt": high}})
+    const History =await history.find({[type]:_id,[typetime]:{"$gte": low, "$lt": high}})
     res.send(History)}catch(e){res.status(500).send("invalid request")}
 })
 
@@ -255,7 +255,7 @@ app.post("/mecha/newuser", async(req,res)=>{
 
 
 
-// trancetion
+
 app.post("/mecha/deluser",async(req,res)=>{
     try{
         await mecha.deleteOne(req.body)
