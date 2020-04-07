@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
-const url = 'mongodb://127.0.0.1:27017/problem'
+const url = 'mongodb+srv://admin:admin@cluster0-zow0t.mongodb.net/test?retryWrites=true&w=majority'
 
-mongoose.connect(process.env.MONGODB_URI || url , {
+mongoose.connect(url , {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
