@@ -52,10 +52,9 @@ module.exports = mongoose.model('mecha',{
         type:Number,
         default:4
     },
-    accountno:{
+    upiId:{
        require:true,
-       type:Number,
-       default:0
+       type:String
     },
     chargingfee:{
         require:true,

@@ -236,6 +236,9 @@ app.post('/txn',async(req,res)=>{
     res.send(Txns)}catch(e){res.status(500).send("invalid request")}
 })
 
+
+
+
 // Mechanic API
 
 
@@ -353,8 +356,6 @@ app.post('/mecha/arrival',async(req,res)=>{
 
 app.post('/mecha/checkpoint/cencel',async(req,res)=>{
     try{const History = await history.findById(req.body._id)
-    if(History.cencelbycustomer === true){
-    }
     res.send(History.cencelbycustomer)}catch(e){res.status(500).send("invalid request")}
 })
 
@@ -437,13 +438,11 @@ app.post("/mecha/organization/newuser",async(req,res)=>{
 
 
 app.post("/mecha/organization/updateuser/:id",async(req,res)=>{
-    
     try{
-        const orga = await Orgamecha.findById(req.params.id)
+        const orga = await orgamecha.findById(req.params.id)
         const base = await mecha.findById(orga.ownerid)
-        
-        const  {car,bike,truck,bus,tacter,autoer}=req.body
-        
+    
+        const  {car=0,bike=0,truck=0,bus=0,tacter=0,autoer=0}=req.body
         const changebase = {
             car:base.car+ (orga.car===0 && car )?1:0,
             bike:base.bike+(orga.bike===0 && bike )?1:0,
@@ -459,7 +458,7 @@ app.post("/mecha/organization/updateuser/:id",async(req,res)=>{
         const user = await orgamecha.findById(req.params.id)
         res.send(user)
     }catch(e){
-        res.status(500).send(e)
+        res.status(500).send(console.log)
     }
 })
 
@@ -497,7 +496,10 @@ app.post('/mecha/organization/checkpoint',async(req,res)=>{
 
 
 
-
+app.post('/mecha/organization/checkpoint/cencel',async(req,res)=>{
+    try{const History = await history.findById(req.body._id)
+    res.send(History.cencelbycustomer)}catch(e){res.status(500).send("invalid request")}
+})
 
 
 // customer API

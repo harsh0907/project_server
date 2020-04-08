@@ -1,3 +1,5 @@
+//Customer
+
 /cust/newuser
 
 req
@@ -226,3 +228,392 @@ req
         "__v": 0
     }
 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Mecha
+
+
+/mecha/newuser
+req
+{
+	"name":"papa",
+	"email":"7777777j@gmail.com",
+	"mobileno":8938274897,
+	"Address":"hahahahahahaha",
+	"latitude":48.149853,
+	"longitude":11.499931,
+    "password":1234567,
+    "mechano":0,          // it will always 0 in case of mecha
+    "Organization":true,
+    upiId:"abs@paytm",
+    "chargingfee":30,
+    "toe":0,   // it will 0 for false and 1 for true
+	"car":1,   // it will 0 for false and 1 for true
+    "bike":1,
+    "bus":1,
+    "truck":0,
+    "tacter":1,
+    "autoer":1
+	
+}
+
+res
+{
+    "Organization": true,
+    "mechano": 1,
+    "rating": 4,
+    "accountno": 0,
+    "chargingfee": 30,
+    "activation": true,
+    "toe": 0,
+    "bike": 1,
+    "car": 1,
+    "bus": 0,
+    "truck": 0,
+    "tacter": 0,
+    "autoer": 0,
+    "token": "login",
+    "_id": "5e8db1395528340024af0604",
+    "name": "papa",
+    "email": "777777j@gmail.com",
+    "mobileno": 8938270897,
+    "Address": "hahahahahahaha",
+    "latitude": 48.149853,
+    "longitude": 11.499931,
+    "password": "1234567",
+    "__v": 0
+}
+
+
+
+
+/mecha/deluser
+req
+{
+	"_id":"5e8db1395528340024af0604"
+}
+
+res
+OK!
+
+
+
+/mecha/checkpoint
+req
+{
+	"_id":"5e8cc5fcb7d0bf0a8027de37"
+}
+
+
+res
+[
+    0
+]
+OR
+[
+    [
+        1,          // indigator
+        48.149853,   // latitude
+        11.499931,   // longitude
+        "5e8cc5d8b7d0bf0a8027de36",    // cust id
+        "car",     // type
+        "5e8db47c5528340024af0605",   // history id
+        1,  // distence 
+        0   // time
+    ],
+    "harsh",
+    []
+]
+
+
+/mecha/reply
+
+req
+{
+	"_id":"5e8b2624800d0a0550729a03",
+	"mechaid":"5e87533b0e5c160b48427c42"
+}
+
+res
+Ok!
+
+
+
+/mecha/reach
+req
+{
+	"_id":"5e7cab4fe6d33806f0b70cda"
+}
+
+res
+ok!
+
+
+
+
+/mecha/updateuser/:id
+https://proprojectindia.herokuapp.com/mecha/updateuser/5e8cca471a0f652908afa616
+
+req
+{
+	"mechano":7
+}
+
+res
+{
+    "Organization": true,
+    "mechano": 7,
+    "rating": 4,
+    "accountno": 0,
+    "chargingfee": 30,
+    "activation": true,
+    "toe": 0,
+    "bike": 1,
+    "car": 1,
+    "bus": 0,
+    "truck": 0,
+    "tacter": 0,
+    "autoer": 0,
+    "token": "login",
+    "_id": "5e8cca471a0f652908afa616",
+    "name": "papa",
+    "email": "77j@gmail.com",
+    "mobileno": 8938264891,
+    "Address": "hahahahahahaha",
+    "latitude": 48.149853,
+    "longitude": 11.499931,
+    "password": "1234567",
+    "__v": 0
+}
+
+
+
+
+/mecha/arrival
+
+req
+{
+	"_id":"5e7cab4fe6d33806f0b70cda"
+}
+res
+ok you reach
+
+
+/mecha/checkpoint/cencel
+req
+{
+    "_id":"5e7cab4fe6d33806f0b70cda"  //history_id
+}
+
+
+res
+true
+false
+
+
+
+/mecha/payment
+req {
+    "merchantid":"5e87533b0e5c160b48427c42",
+    "amount":120,
+    "txnid":"123",
+    "time":"454545545454",
+    "historyids":["5e8360496a8fe23f64878930","5e8360a2dec30e109898b080"]
+    
+}
+res
+ok
+
+
+/login
+/logout
+/history
+all above will same as customer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Orgamecha
+
+
+/mecha/organization/deluser
+
+
+req
+{
+	"_id":"5e7cab4fe6d33806f0b70cda" // orgamechacust id
+}
+
+
+
+res
+OK!
+
+
+
+/mecha/organization/newuser
+
+req
+{
+	"name":"harsh",
+	"email":"p0a@gmail.com",
+	"mobileno":1090207091,
+	"Address":"hahahahahahaha",
+	"ownerid":"5e7b646a0421c228a44ce9d4", //mecha id
+	"password":1234567,
+	"car":1,
+	"bike":1,
+    "tacter":1,
+    "truck":1,
+    "autoer":0
+}
+
+res
+{
+    "rating": 4,
+    "activation": true,
+    "bike": 1,
+    "car": 1,
+    "bus": 0,
+    "truck": 0,
+    "tacter": 1,
+    "autoer": 0,
+    "mechano": 1,
+    "token": "login",
+    "_id": "5e8dbddc5528340024af0606",
+    "name": "harsh",
+    "email": "p0a@gmail.com",
+    "mobileno": 1090207091,
+    "Address": "hahahahahahaha",
+    "ownerid": "5e8cc5fcb7d0bf0a8027de37",
+    "password": "1234567",
+    "__v": 0
+}
+
+
+
+
+/mecha/organization/updateuser/:id
+
+localhost:3000/mecha/organization/updateuser/5e8dc77465e7ab0024e95103
+res
+{
+	"car":0,
+	"bike":0,
+	"truck":0,
+	"bus":0,
+	"tacter":0,
+	"autoer":0,
+	"name":"papa"
+	
+}
+
+res
+
+
+{
+    "rating": 4,
+    "activation": true,
+    "bike": 0,
+    "car": 0,
+    "bus": 0,
+    "truck": 0,
+    "tacter": 0,
+    "autoer": 0,
+    "mechano": 1,
+    "token": "login",
+    "_id": "5e8dc77465e7ab0024e95103",
+    "name": "papa",
+    "email": "p04545@gmail.com",
+    "mobileno": 1110207091,
+    "Address": "hahahahahahaha",
+    "ownerid": "5e8cc5fcb7d0bf0a8027de37",
+    "password": "1234567",
+    "__v": 0
+}
+
+
+
+
+
+
+/mecha/organization/checkpoint
+
+
+{
+	"_id":"5e8cc5fcb7d0bf0a8027de37"
+}
+
+
+
+res
+[0]
+OR
+[
+    1,
+    48.149853,  //latitude
+    11.499931,   //longitude
+    "5e8cc5d8b7d0bf0a8027de36",   //cust id
+    "car",   // type
+    "5e8dcedbb3f2781d242a5d25",   //history id
+    1,    // distence 
+    0,    //time
+    [
+        "harsh"  //name of customer
+    ]
+]
+
+
+/mecha/organization/checkpoint/cencel
+req
+{
+    "_id":"5e7cab4fe6d33806f0b70cda"  //history_id
+}
+
+
+res
+true
+false
+
+
