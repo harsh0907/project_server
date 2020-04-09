@@ -69,7 +69,7 @@ app.post('/login',async(req,res)=>{
     const Mecha = await mecha.find({email,password})
     const Cust = await cust.find({email,password})
     const Orgamecha = await orgamecha.find({email,password})
-
+    var id1 = []
 
     if(Mecha.length === 0 && Cust.length===0 && Orgamecha.length===0)
        throw new Error()
@@ -77,22 +77,25 @@ app.post('/login',async(req,res)=>{
     if(Mecha.length!==0){
         if(Mecha[0].token === 'login')
           throw new Error()
-        await mecha.findByIdAndUpdate(Mecha[0]._id,{activation:true,token:"login"})  
+        const _id = await mecha.findByIdAndUpdate(Mecha[0]._id,{activation:true,token:"login"})  
+        id1.push(_id)
     }
 
     if(Cust.length!==0){
         if(Cust[0].token === 'login')
           throw new Error()
-        await cust.findByIdAndUpdate(Cust[0]._id,{activation:true,token:"login"})  
+        const _id = await cust.findByIdAndUpdate(Cust[0]._id,{activation:true,token:"login"})  
+        id1.push(_id)
     }
 
     if(Orgamecha.length!==0){
         if(Orgamecha[0].token === 'login')
           throw new Error()
-        await orgamecha.findByIdAndUpdate(Orgamecha[0]._id,{activation:true,token:"login"})  
+        const _id = await orgamecha.findByIdAndUpdate(Orgamecha[0]._id,{activation:true,token:"login"})
+        id1.push(_id)  
     }
-
-     res.status(200).send("login")
+     
+     res.status(200).send(id1)
 
    }catch(e){ 
     res.status(500).send("invalid login")}
@@ -114,6 +117,20 @@ app.post('/logout',async(req,res)=>{
 
 
 // admin API
+
+
+
+app.post('/admin/payment',async(req,res)=>{
+    console.log("harsh")
+    try{const {historyid,amount,txnid,time} = req.body
+    await history.findByIdAndUpdate(historyid,{paycomplete:true})
+    
+    const Txn = await new txn({amount,txnid,time})
+    await Txn.save()
+    res.send("ok")}catch(e){res.status(500).send("invalid request")}
+})
+
+
 
 
 app.post('/database/mecha',async(req,res) =>{
@@ -235,6 +252,26 @@ app.post('/txn',async(req,res)=>{
     const Txns = await txn.find({mechaid})
     res.send(Txns)}catch(e){res.status(500).send("invalid request")}
 })
+
+
+
+
+
+
+
+app.post('/admin/history',async(req,res)=>{
+    try{const {minday,minmon,minyear,maxday,maxmon,maxyear} = req.body
+    const low = moment({ 
+        year :minyear, month :(minmon-1), day :minday
+    }).valueOf()
+    const high = moment({ 
+        year :maxyear, month :(maxmon-1), day :maxday, 
+        hour :23, minute :59
+    }).valueOf()
+    const History =await history.find({paycomplete:false})
+    res.send(History)}catch(e){res.status(500).send("invalid request")}
+})
+
 
 
 

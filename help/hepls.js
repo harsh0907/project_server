@@ -177,7 +177,19 @@ req
 	"password":"123456789"
 }
 res
-login
+[
+    {
+        "typeofvehicle": "car",
+        "activation": false,
+        "token": "logout",
+        "_id": "5e8cc5d8b7d0bf0a8027de36",
+        "name": "harsh",
+        "email": "9h@ail.com",
+        "mobileno": 1571121151,
+        "password": "12345656",
+        "__v": 0
+    }
+]
 
 
 /logout

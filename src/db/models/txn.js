@@ -15,6 +15,7 @@ module.exports = mongoose.model('txn',{
     },
     merchantid:{
         require:true,
-        type:mongoose.ObjectId 
+        type:mongoose.ObjectId ,
+        default:null
     }
 })
