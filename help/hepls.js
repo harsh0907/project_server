@@ -327,6 +327,24 @@ res
 
 
 
+/mecha/checkpoint/done
+
+
+req
+{
+	"_id":"5e8756661248a33cc073bf38" // history id
+}
+
+
+res
+
+yes
+[1]
+No
+[0]
+
+
+
 
 /mecha/deluser
 req

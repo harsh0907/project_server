@@ -397,7 +397,14 @@ app.post('/mecha/checkpoint/cencel',async(req,res)=>{
 })
 
 
-
+app.post('/mecha/checkpoint/done',async(req,res)=>{
+    try{const {_id} = req.body
+    const His = await history.findById(_id)
+    if(His.donetime !== null)
+       res.send([1])
+    else
+       res.send([0])}catch(e){res.status(500).send("invalid request")}   
+})
 
 app.post('/mecha/payment',async(req,res)=>{
     try{const {merchantid,historyids,amount,txnid,time} = req.body
