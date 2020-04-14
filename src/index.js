@@ -314,21 +314,23 @@ app.post("/mecha/deluser",async(req,res)=>{
 
 
 app.post('/mecha/checkpoint',async(req,res)=>{
+    const med = []
     try
     {const use = map.get(JSON.stringify(req.body._id))
+     med.push(use)   
     if(use[0] != 0)
     {const result = await cust.findById(use[3])
         const Mecha = await mecha.findById(req.body._id)
     if(Mecha.Organization){
-        const mechalist = await orgamecha.find({ownerid :req.body._id,mechano:{$gte:1}, activation:true,[use[4]]: { $gte: 1 }})
-        await mecha.findByIdAndUpdate(req.body._id,{activation:false})
-        res.send([use,result.name,mechalist])
+        const mechalist = await orgamecha.find({ownerid :req.body._id,mechano:{$gte:1},[use[4]]: { $gte: 1 }})
+        med.push(result.name,mechalist)
         }else{
-        await mecha.findByIdAndUpdate(req.body._id,{mechano:0})
+        console.log("not")
+        await mecha.findByIdAndUpdate(req.body._id,{mechano:0,activation:true})
         await history.findByIdAndUpdate(use[5],{arrivaltime:moment().valueOf()})
-        use.push([result.name])
+        med.push(result.name)
     }}
-    res.send(use)
+    res.send(med)
      
  }catch(e){console.log(e)
     res.send(e)}
@@ -343,7 +345,7 @@ app.post('/mecha/reply',async(req,res)=>{
     try{const {_id,mechaid} = req.body
     const use = map.get(JSON.stringify(mechaid))
     map.set(JSON.stringify(_id),use)
-    const orga = await orgamecha.findById(_id)
+    const orga = await orgamecha.findByIdAndUpdate(_id,{mechano:0})
     await mecha.findByIdAndUpdate(orga.ownerid,{activation:true})
     console.log(map)
     res.send("Ok!")}catch(e){res.status(500).send("invalid request")} 
@@ -514,7 +516,6 @@ app.post('/mecha/organization/checkpoint',async(req,res)=>{
     const result = await cust.findById(use[3])
     if(use[0]!==0)
      {
-        await orgamecha.findByIdAndUpdate(req.body._id,{mechano:0})
         
         const orga = await orgamecha.findById(req.body)
         const base = await mecha.findById(orga.ownerid)
@@ -628,15 +629,22 @@ app.post('/cust/mechalist',async(req,res)=>{
             body: JSON.stringify(list1) ,
             method: 'POST'
           }, function (err, re, body) {
-          
             const final = JSON.parse(body)
-             const op = list.map((res,index)=>{
-
+             var sta = 200
+             var op = []
+            if(final.matrix[0][0].statusCode !== 400 )     
+            {
+              op = list.map((res,index)=>{
+                
                  res._doc.time = final.matrix[0][index].response.routeSummary.travelTimeInSeconds
                  res._doc.distance = final.matrix[0][index].response.routeSummary.lengthInMeters
                  return res
-             })
-            res.send(op)
+                 
+             })}else{
+                sta = 500
+                op = []
+             }
+            res.status(sta).send(op)
           });
 
         
@@ -659,7 +667,7 @@ app.post('/cust/selectmecha',async(req,res)=>{
              "latitude":latitude,
              "originalamount":(Mecha.Organization?price[1]:price[0])
          }
-
+         await mecha.findByIdAndUpdate(mechaid,{activation:false})
          const History = await new history(define)
          await History.save()
          map.set(JSON.stringify(mechaid),[1,latitude,longitude,custid,type,History._id,distance,time])
