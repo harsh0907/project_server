@@ -164,7 +164,7 @@ ok
 /cust/cencel
 req
 {
-	"_id":"5e8368cab49e582d24c11e51"
+	"_id":"5e8368cab49e582d24c11e51"  // history id
 }
 res
 cencel

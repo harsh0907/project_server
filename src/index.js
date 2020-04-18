@@ -749,7 +749,9 @@ app.post('/cust/payment',async(req,res)=>{
 
 
 app.post('/cust/cencel',async(req,res)=>{
-    try{await history.findByIdAndUpdate(req.body._id,{cencelbycustomer:true,cenceltime:moment().valueOf(),originalamount:0})
+    try{
+    const user = await history.findByIdAndUpdate(req.body._id,{cencelbycustomer:true,cenceltime:moment().valueOf(),originalamount:0})
+    map.set(JSON.stringify(user.mechaid),[0])
     res.send("cencel")}catch(e){res.status(500).send("invalid request")}
 })
 
