@@ -700,6 +700,7 @@ app.post('/cust/done',async(req,res)=>{
             
         }
         await history.findByIdAndUpdate(ele[5],{donetime:moment().valueOf()})
+        map.set(JSON.stringify(req.body._id),[0])
         res.send("ok")
     }catch(e){res.status(500).send(e)}
 })
