@@ -750,8 +750,28 @@ app.post('/cust/payment',async(req,res)=>{
 
 app.post('/cust/cencel',async(req,res)=>{
     try{
-    const user = await history.findByIdAndUpdate(req.body._id,{cencelbycustomer:true,cenceltime:moment().valueOf(),originalamount:0})
-    map.set(JSON.stringify(user.mechaid),[0])
+
+        await mecha.findByIdAndUpdate(req.body._id,{mechano:1})
+        const orga = await orgamecha.findByIdAndUpdate(req.body._id,{mechano:1})
+        const ele = map.get(JSON.stringify(req.body._id))
+
+        if(orga!==null){
+            const base = await mecha.findById(orga.ownerid)
+            const changebase = {
+                mechano:base.mechano+1,
+                car:base.car+orga.car,
+                bike:base.bike+orga.bike,
+                truck:base.truck+orga.truck,
+                bus:base.bus+orga.bus,
+                tacter:base.tacter+orga.tacter,
+                autoer:base.autoer+orga.autoer
+            }
+            await mecha.findByIdAndUpdate(orga.ownerid,changebase,{ new: true, runValidators: true })
+            
+        }
+        await history.findByIdAndUpdate(ele[5],{cencelbycustomer:true,cenceltime:moment().valueOf(),originalamount:0})
+ 
+        map.set(JSON.stringify(req.body._id),[0])
     res.send("cencel")}catch(e){res.status(500).send("invalid request")}
 })
 
