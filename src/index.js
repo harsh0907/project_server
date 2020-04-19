@@ -40,7 +40,7 @@ intial()
 
 
 app.get('/',(req,res)=>{
-    res.send("Working!")
+    res.send("ng!")
 })
 
 
