@@ -40,7 +40,7 @@ intial()
 
 
 app.get('/',(req,res)=>{
-    res.send("ing!")
+    res.send("[]")
 })
 
 
