@@ -70,10 +70,7 @@ app.post('/login',async(req,res)=>{
     const Cust = await cust.find({email,password})
     const Orgamecha = await orgamecha.find({email,password})
     var id1 = []
-    console.log(Mecha)
-    console.log(Cust)
-    console.log(Orgamecha)
-     
+    
     if(Mecha.length === 0 && Cust.length===0 && Orgamecha.length===0)
        throw new Error()
 
