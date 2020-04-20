@@ -683,8 +683,8 @@ app.post('/cust/selectmecha',async(req,res)=>{
 
 app.post('/cust/done',async(req,res)=>{
     try{
-        await mecha.findByIdAndUpdate(req.body._id,{mechano:1})
-        const orga = await orgamecha.findByIdAndUpdate(req.body._id,{mechano:1})
+        await mecha.findByIdAndUpdate(req.body._id,{mechano:1,activation:true})
+        const orga = await orgamecha.findByIdAndUpdate(req.body._id,{mechano:1,activation:true})
         const ele = map.get(JSON.stringify(req.body._id))
 
         if(orga!==null){
@@ -752,8 +752,8 @@ app.post('/cust/payment',async(req,res)=>{
 app.post('/cust/cencel',async(req,res)=>{
     try{
 
-        await mecha.findByIdAndUpdate(req.body._id,{mechano:1})
-        const orga = await orgamecha.findByIdAndUpdate(req.body._id,{mechano:1})
+        await mecha.findByIdAndUpdate(req.body._id,{mechano:1,activation:true})
+        const orga = await orgamecha.findByIdAndUpdate(req.body._id,{mechano:1,activation:true})
         const ele = map.get(JSON.stringify(req.body._id))
 
         if(orga!==null){
