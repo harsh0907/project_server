@@ -728,7 +728,6 @@ app.post('/cust/feedback',async(req,res)=>{
 app.post('/cust/checkpoint',async(req,res)=>{
     try{
         const {historyid} = req.body
-        await history.findByIdAndUpdate(historyid,{destinationtime:1})
         const History = await history.findById(historyid)
         if(History.destinationtime!==null)
            res.send([1])
