@@ -503,7 +503,7 @@ app.post("/mecha/organization/updateuser/:id",async(req,res)=>{
         const user = await orgamecha.findById(req.params.id)
         res.send(user)
     }catch(e){
-        res.status(500).send(console.log)
+        res.status(500).send(e)
     }
 })
 
