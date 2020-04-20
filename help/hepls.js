@@ -401,7 +401,7 @@ Ok!
 /mecha/reach
 req
 {
-	"_id":"5e7cab4fe6d33806f0b70cda"
+	"_id":"5e7cab4fe6d33806f0b70cda"   /// mechnic _id
 }
 
 res
