@@ -595,16 +595,21 @@ app.post("/cust/updateuser/:id",async(req,res)=>{
 
 app.post('/cust/mechalist',async(req,res)=>{
     const {toe=0,type="car",latitude=0,longitude=0} = req.body
-    console.log(req.body)
     try{
+        
+        
+
          const list = await mecha.find({toe :{$gte:toe},mechano:{$gte:1}, activation:true,[type]: { $gte: 1 }})
-          
-          const list2 = [
+        
+          if(list.length ===0 )
+            res.status(200).send([])
+          else
+          {const list2 = [
             {
               "point": {"latitude": latitude,"longitude": longitude}
             }
           ]
-
+          
           const list3 =[]
 
           list.forEach((lis) =>{
@@ -630,25 +635,23 @@ app.post('/cust/mechalist',async(req,res)=>{
             body: JSON.stringify(list1) ,
             method: 'POST'
           }, function (err, re, body) {
+            var sta = 200
+            var op = []
             const final = JSON.parse(body)
-             var sta = 200
-             var op = []
-             console.log(final)
             if(final.matrix[0][0].statusCode !== 400 )     
             {
-              op = list.map((res,index)=>{
-                
+               op = list.map((res,index)=>{
                  res._doc.time = final.matrix[0][index].response.routeSummary.travelTimeInSeconds
                  res._doc.distance = final.matrix[0][index].response.routeSummary.lengthInMeters
-                 return res
-                 
-             })}else{
+                 return res})
+                 sta = 200
+            }else{
                 sta = 500
-                op = []
              }
-            res.status(sta).send(op)
-          });
-
+             res.status(sta).send(op)
+          })}
+          
+          
         
     }catch(e){
         res.status(500).send(e)
