@@ -595,7 +595,7 @@ app.post("/cust/updateuser/:id",async(req,res)=>{
 
 app.post('/cust/mechalist',async(req,res)=>{
     const {toe=0,type="car",latitude=0,longitude=0} = req.body
-
+    console.log(req.body)
     try{
          const list = await mecha.find({toe :{$gte:toe},mechano:{$gte:1}, activation:true,[type]: { $gte: 1 }})
           
@@ -633,6 +633,7 @@ app.post('/cust/mechalist',async(req,res)=>{
             const final = JSON.parse(body)
              var sta = 200
              var op = []
+             console.log(final)
             if(final.matrix[0][0].statusCode !== 400 )     
             {
               op = list.map((res,index)=>{
