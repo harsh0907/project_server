@@ -595,7 +595,7 @@ app.post('/cust/mechalist',async(req,res)=>{
     const {toe=0,type="car",latitude=0,longitude=0} = req.body
     try{
         
-        
+        console.log(req.body)
 
          const list = await mecha.find({toe :{$gte:toe},mechano:{$gte:1}, activation:true,[type]: { $gte: 1 }})
         
