@@ -599,7 +599,7 @@ app.post('/cust/mechalist',async(req,res)=>{
 
          const list = await mecha.find({toe :{$gte:toe},mechano:{$gte:1}, activation:true,[type]: { $gte: 1 }})
         
-          if(list.length ===0 )
+          if(list.length ===0 || req.body.latitude === null || req.body.longitude === null)
             res.status(200).send([])
           else
           {const list2 = [
