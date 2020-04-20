@@ -122,7 +122,6 @@ app.post('/logout',async(req,res)=>{
 
 
 app.post('/admin/payment',async(req,res)=>{
-    console.log("harsh")
     try{const {historyid,amount,txnid,time} = req.body
     await history.findByIdAndUpdate(historyid,{paycomplete:true})
     
@@ -326,14 +325,13 @@ app.post('/mecha/checkpoint',async(req,res)=>{
         const mechalist = await orgamecha.find({ownerid :req.body._id,mechano:{$gte:1},[use[4]]: { $gte: 1 }})
         med.push(result.name,mechalist)
         }else{
-        console.log("not")
         await mecha.findByIdAndUpdate(req.body._id,{mechano:0,activation:true})
         await history.findByIdAndUpdate(use[5],{arrivaltime:moment().valueOf()})
         med.push(result.name)
     }}
     res.send(med)
      
- }catch(e){console.log(e)
+ }catch(e){
     res.send(e)}
  
 
@@ -348,7 +346,7 @@ app.post('/mecha/reply',async(req,res)=>{
     map.set(JSON.stringify(_id),use)
     const orga = await orgamecha.findByIdAndUpdate(_id,{mechano:0})
     await mecha.findByIdAndUpdate(orga.ownerid,{activation:true})
-    console.log(map)
+    
     res.send("Ok!")}catch(e){res.status(500).send("invalid request")} 
 })
 
@@ -678,7 +676,6 @@ app.post('/cust/selectmecha',async(req,res)=>{
          map.set(JSON.stringify(mechaid),[1,latitude,longitude,custid,type,History._id,distance,time])
          console.log(map)
          res.send(History._id)}catch(e){
-            console.log(e)
              res.status(500).send(e)}
 })
 
@@ -733,7 +730,6 @@ app.post('/cust/checkpoint',async(req,res)=>{
         const {historyid} = req.body
         await history.findByIdAndUpdate(historyid,{destinationtime:1})
         const History = await history.findById(historyid)
-        console.log(History)
         if(History.destinationtime!==null)
            res.send([1])
         else 
