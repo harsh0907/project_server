@@ -636,6 +636,7 @@ app.post('/cust/mechalist',async(req,res)=>{
             var sta = 200
             var op = []
             const final = JSON.parse(body)
+            console.log(final)
             if(final.matrix[0][0].statusCode !== 400 )     
             {
                op = list.map((res,index)=>{
