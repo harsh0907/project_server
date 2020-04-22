@@ -7,6 +7,7 @@ const mecha = require('./db/models/mecha')
 const orgamecha = require('./db/models/orgamecha')
 const cust = require('./db/models/cust')
 const history = require('./db/models/history')
+const admin = require('./db/models/admin')
 const moment  = require('moment')
 const txn = require('./db/models/txn')
 const app = express()
@@ -118,6 +119,25 @@ app.post('/logout',async(req,res)=>{
 
 
 // admin API
+
+
+
+app.post('/admin/login',async(req,res)=>{
+    try{var op = [1]
+    var sta = 200
+    const Admin = await admin.find(req.body)
+    if(Admin.length ===0 )
+      {op=[0]}  
+     res.status(sta).send(op)}catch(e){res.status(500).send("error")}   
+})
+
+
+
+app.post('/admin/newuser',async(req,res) =>{
+    try{const Admin = await new admin(req.body)
+    await Admin.save()
+    res.send("user create")}catch(e){res.status(500).send("error")}
+})
 
 
 

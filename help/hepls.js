@@ -1,5 +1,7 @@
 //Customer
 
+import { response } from "express"
+
 /cust/newuser
 
 req
@@ -445,9 +447,6 @@ res
     "__v": 0
 }
 
-
-
-
 /mecha/arrival
 
 req
@@ -646,4 +645,124 @@ res
 true
 false
 
+
+
+
+
+
+// Admin APIs
+
+
+
+/admin/login
+req
+{
+	"email":"harsh@gmail.com",
+	"password":"123456"
+}
+res
+[1] yes
+[0] no
+
+
+
+/admin/newuser
+req
+{
+	"email":"harsh@gmail.com",
+	"password":123456,
+	"name":"harsh"
+}
+
+res
+user create
+
+
+
+
+/admin/payment
+req
+{historyid,amount,txnid,time}
+
+res
+ok
+
+
+/database/mecha
+req
+// Nothing
+res
+Ok!
+
+
+
+/database/cust
+req
+//Nothing
+
+res
+Ok!
+
+
+
+
+/database/orgamecha
+req
+//Nothing
+
+res
+Ok!
+
+
+
+/database/txn
+req
+// Nothing
+
+
+res
+Ok!
+
+
+
+/database/history
+req
+// Nothing
+
+res
+Ok!
+
+
+/mecha
+req
+// Nothing
+
+res
+[]
+
+
+/customer
+req
+// Nothing
+
+res
+[]
+
+
+/mecha/all
+req
+{
+    '_id':"lkdjdnvndf dojsvdn"  // mecha id
+}
+
+res
+[]  
+
+
+/orgamecha
+req
+//Nothing
+
+res
+[]
 
