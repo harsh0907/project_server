@@ -642,9 +642,7 @@ app.post('/cust/mechalist',async(req,res)=>{
              "destinations": list3
          }
          
-         console.log(list1)
-         console.log(list2)
-         console.log(list3)
+         
 
          const url = 'https://api.tomtom.com/routing/1/matrix/sync/json?key=jU4h6prZhmfPawSj5A5qdfEQn1VH3kiQ'
         
@@ -658,6 +656,7 @@ app.post('/cust/mechalist',async(req,res)=>{
           }, function (err, re, body) {
             var sta = 200
             var op = []
+            console.log(0)
             console.log(body)
             console.log(1)
             const final = JSON.parse(body)
