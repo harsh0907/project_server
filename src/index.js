@@ -635,10 +635,12 @@ app.post('/cust/mechalist',async(req,res)=>{
           }, function (err, re, body) {
             var sta = 200
             var op = []
+            console.log(1)
             const final = JSON.parse(body)
             console.log(final)
             if(final.matrix[0][0].statusCode !== 400 )     
             {
+                console.log(2)
                op = list.map((res,index)=>{
                  res._doc.time = final.matrix[0][index].response.routeSummary.travelTimeInSeconds
                  res._doc.distance = final.matrix[0][index].response.routeSummary.lengthInMeters
@@ -647,6 +649,7 @@ app.post('/cust/mechalist',async(req,res)=>{
             }else{
                 sta = 500
              }
+             console.log(3)
              res.status(sta).send(op)
           })}
           
