@@ -744,16 +744,22 @@ app.post('/cust/done',async(req,res)=>{
 
 
 app.post('/cust/feedback',async(req,res)=>{
+	console.log(req.body);
     try{const Mecha =await mecha.findById(req.body._id)
+	console.log(1);
     const orga =await orgamecha.findById(req.body._id)
     if(orga!==null){
+		console.log(2);
         const base =await mecha.findById(orga.ownerid)
         await mecha.findByIdAndUpdate(orga.ownerid,{rating:((base.rating+req.body.rating)/base.mechano)})
         await orgamecha.findByIdAndUpdate(orga._id,{rating:((orga.rating+req.body.rating)/2)})
     }else{
+		console.log(3);
         await mecha.findByIdAndUpdate( Mecha._id,{rating:((Mecha.rating+req.body.rating)/2)})
+		console.log(4);
     }
     await history.findByIdAndUpdate(req.body.historyid,{feedback:req.body.rating})
+	console.log(5);
     res.send('thanks')}catch(e){res.status(500).send("invalid request")}
 })
 
