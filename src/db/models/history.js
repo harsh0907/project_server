@@ -84,6 +84,10 @@ module.exports = mongoose.model('history',{
         require:true,
         type:Number
     },
+    relese:{
+        type: Boolean,
+        default: false
+    },
     feedback:{
         type:Number,
         default:0,

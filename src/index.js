@@ -467,6 +467,12 @@ app.post("/mecha/organization/deluser",async(req,res)=>{
 })
 
 
+app.post('/mecha/relese',async(req,res) => {
+    try{const {historyid} = req.body;
+    const History = await history.findByIdAndUpdate(historyid,{relese:true});
+    res.send('relese')}catch(e){res.status(500).send("invalid request")}
+})
+
 
 
 
@@ -772,6 +778,17 @@ app.post('/cust/payment',async(req,res)=>{
     const Txn = await new txn({merchantid,amount,txnid,time})
     await Txn.save()
     res.send("ok")}catch(e){res.status(500).send("invalid request")}
+})
+
+
+app.post('/cust/relese',async(req,res) => {
+    try{const {historyid} = req.body;
+    var op = [0]
+    const History = await history.findById(historyid);
+    if(History.relese)
+       op = [1]
+    
+    res.send(op)}catch(e){res.status(500).send("invalid request")}
 })
 
 
