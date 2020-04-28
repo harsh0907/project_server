@@ -744,7 +744,6 @@ app.post('/cust/done',async(req,res)=>{
 
 
 app.post('/cust/feedback',async(req,res)=>{
-	console.log(req.body);
     try{const Mecha =await mecha.findById(req.body._id)
     const orga =await orgamecha.findById(req.body._id)
     if(orga!==null){
