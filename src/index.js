@@ -469,7 +469,7 @@ app.post("/mecha/organization/deluser",async(req,res)=>{
 
 app.post('/mecha/relese',async(req,res) => {
     try{const {historyid} = req.body;
-    const History = await history.findByIdAndUpdate(historyid,{relese:true});
+    await history.findByIdAndUpdate(historyid,{relese:true});
     res.send('relese')}catch(e){res.status(500).send("invalid request")}
 })
 
