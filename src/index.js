@@ -689,6 +689,7 @@ app.post('/cust/selectmecha',async(req,res)=>{
          const Mecha = mecha.findById(mechaid)
          const define ={
              "custid":custid,
+			 type,
              "mechaid":mechaid,
              "requesttime":moment().valueOf(),
              "typeofvechicle":type,

@@ -92,6 +92,11 @@ module.exports = mongoose.model('history',{
         type:Number,
         default:0,
         require:true
-    }
+    },
+	type:{
+		type:String,
+		default:'car',
+		require:true,
+	}
 
 })
