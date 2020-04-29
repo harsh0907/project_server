@@ -48,15 +48,8 @@ app.get('/',(req,res)=>{
 
 
 app.post('/history',async(req,res)=>{
-    try{const {type,_id,typetime,minday,minmon,minyear,maxday,maxmon,maxyear} = req.body
-    const low = moment({ 
-        year :minyear, month :(minmon-1), day :minday
-    }).valueOf()
-    const high = moment({ 
-        year :maxyear, month :(maxmon-1), day :maxday, 
-        hour :23, minute :59
-    }).valueOf()
-    const History =await history.find({[type]:_id,[typetime]:{"$gte": low, "$lt": high}})
+    try{const {type,_id} = req.body
+    const History =await history.find({[type]:_id})
     res.send(History)}catch(e){res.status(500).send("invalid request")}
 })
 
