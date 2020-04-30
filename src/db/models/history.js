@@ -93,10 +93,13 @@ module.exports = mongoose.model('history',{
         default:0,
         require:true
     },
-	type:{
+	address:{
 		type:String,
-		default:'car',
-		require:true,
+		default:"add"
+	},
+	toe:{
+		type:Number,
+		default:0,
 	}
 
 })
