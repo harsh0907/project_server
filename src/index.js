@@ -695,9 +695,9 @@ app.post('/cust/selectmecha',async(req,res)=>{
              "typeofvechicle":type,
              "longitude":longitude,
              "latitude":latitude,
-             "originalamount":(Mecha.Organization?price[1]:price[0])
-			 "address":"address"
-			 "toe":"toe"
+             "originalamount":(Mecha.Organization?price[1]:price[0]),
+			 address,
+			 toe,
          }
          await mecha.findByIdAndUpdate(mechaid,{activation:false})
          const History = await new history(define)
