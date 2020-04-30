@@ -685,14 +685,14 @@ app.post('/cust/mechalist',async(req,res)=>{
 
 
 app.post('/cust/selectmecha',async(req,res)=>{
-         try{const {mechaid,longitude,latitude,custid,typeofvechicle,distance,time,address,toe} = req.body
+         try{const {mechaid,longitude,latitude,custid,typeofvehicle,distance,time,address,toe} = req.body
          const Mecha = mecha.findById(mechaid)
          const define ={
              "custid":custid,
 			 "typeofvehicle":type,
              "mechaid":mechaid,
              "requesttime":moment().valueOf(),
-             typeofvechicle,
+             typeofvehicle,
              "longitude":longitude,
              "latitude":latitude,
              "originalamount":(Mecha.Organization?price[1]:price[0]),
