@@ -53,7 +53,7 @@ module.exports = mongoose.model('history',{
     },
     chargingfee:{
         require:true,
-        default:0,
+        default:null,
         type:Number
     },
     cencelbycustomer:{
