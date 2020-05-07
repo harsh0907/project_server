@@ -779,9 +779,8 @@ app.post('/cust/paymentupdate',async(req,res)=>{
     try{const {_id,historyid = null,status,txnid = null,amount} = req.body
     if(status === 'SUCCESS'){
         await history.findByIdAndUpdate(historyid,{chargingfee:amount})
-    }else{
+    }
 	   await txn.findByIdAndUpdate(_id,{status,txnid,historyid});	
-	}
     res.send("Ok")}catch(e){res.status(500).send("Invalid request")}
 })
 
