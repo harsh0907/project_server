@@ -768,11 +768,21 @@ app.post('/cust/checkpoint',async(req,res)=>{
 
 
 app.post('/cust/payment',async(req,res)=>{
-    try{const {merchantid,historyid,amount,txnid,time} = req.body
+    try{const {id,historyid,amount} = req.body
     await history.findByIdAndUpdate(historyid,{chargingfee:amount})
-    const Txn = await new txn({merchantid,amount,txnid,time})
+    const Txn = await new txn({id,amount,historyid,time:moment().valueOf()})
     await Txn.save()
-    res.send("ok")}catch(e){res.status(500).send("invalid request")}
+    res.send(Txn)}catch(e){res.status(500).send("Invalid request")}
+})
+
+
+app.post('/cust/paymentupdate',async(req,res)=>{
+    try{const {_id,historyid,status,txnid} = req.body
+    if(status !== 'SUCCESS'){
+        await history.findByIdAndUpdate(historyid,{chargingfee:null})
+    }
+    await txn.findByIdAndUpdate(_id,{status,txnid});
+    res.send("Ok")}catch(e){res.status(500).send("Invalid request")}
 })
 
 

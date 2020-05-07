@@ -7,13 +7,24 @@ module.exports = mongoose.model('txn',{
     },
     txnid:{
         type:String,
-        require:true
+        require:true,
+        default:null,
     },
     time:{
         require:true,
         type: String
     },
-    merchantid:{
+    id:{
+        require:true,
+        type:mongoose.ObjectId ,
+        default:null
+    },
+    status:{
+        require:true,
+        type:String,
+        default:null,
+    },
+    historyid:{
         require:true,
         type:mongoose.ObjectId ,
         default:null
