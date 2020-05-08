@@ -699,9 +699,10 @@ app.post('/cust/selectmecha',async(req,res)=>{
 			 toe,
          }
          await mecha.findByIdAndUpdate(mechaid,{activation:false})
+		 const user = await cust.findById(custid)
          const History = await new history(define)
          await History.save()
-         map.set(JSON.stringify(mechaid),[1,latitude,longitude,custid,type,History._id,distance,time])
+         map.set(JSON.stringify(mechaid),[1,latitude,longitude,custid,type,History._id,distance,time,user.email,user.mobileno])
          console.log(map)
          res.send(History._id)}catch(e){
              res.status(500).send(e)}
