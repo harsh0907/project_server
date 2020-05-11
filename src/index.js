@@ -359,8 +359,9 @@ app.post('/mecha/checkpoint',async(req,res)=>{
 
 app.post('/mecha/payment',async(req,res)=>{
     try{
-        const {_id} = req.body
-        const update = await history.updateMany({mechaid:_id},{$set:{ paycomplete: true } })
+        const {status,_id,txnid,mechaid} = req.body
+		await txn.findByIdAndUpdate(_id,{status,txnid});	
+        const update = await history.updateMany({mechaid},{$set:{ paycomplete: true } })
        res.send("Ok!")
     } catch(e){res.status(500).send("invalid request")} 
 })
@@ -710,7 +711,7 @@ app.post('/cust/selectmecha',async(req,res)=>{
              "typeofvehicle":type,
              "longitude":longitude,
              "latitude":latitude,
-             "originalamount":(Mecha.Organization?price[1]:price[0]),
+             "originalamount": 1,
 			 address,
 			 toe,
          }
