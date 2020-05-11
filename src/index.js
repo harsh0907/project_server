@@ -353,6 +353,22 @@ app.post('/mecha/checkpoint',async(req,res)=>{
 
 
 
+
+
+
+
+app.post('/mecha/payment',async(req,res)=>{
+    try{
+        const {_id} = req.body
+        const update = await history.updateMany({mechaid:_id},{$set:{ paycomplete: true } })
+       res.send("Ok!")
+    } catch(e){res.status(500).send("invalid request")} 
+})
+
+
+
+
+
 app.post('/mecha/reply',async(req,res)=>{
     try{const {_id,mechaid} = req.body
     const use = map.get(JSON.stringify(mechaid))
