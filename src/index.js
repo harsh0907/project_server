@@ -298,7 +298,7 @@ app.post("/mecha/newuser", async(req,res)=>{
       await Mecha.save()
       map.set(JSON.stringify(Mecha._id),[0])
      
-        res.status(200).send(Mecha)
+        res.status(200).send([1])
     }catch(e){
         res.status(500).send(e)
     }
