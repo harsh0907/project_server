@@ -191,11 +191,8 @@ app.post('/database/history',async(req,res)=>{
 
 
 app.post('/changeprice',(req,res)=>{
-    try{price[0] = req.body.single
-    price[1] = req.body.many
-    price[2] = req.body.minamount // for a admin that have to set
-    price[3] = '1'
-    res.send(price)}catch(e){res.status(500).send("invalid request")}
+    try{price[0] = req.body.price
+    res.send([1])}catch(e){res.status(500).send("invalid request")}
 })
 
 
