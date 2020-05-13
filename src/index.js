@@ -217,7 +217,7 @@ app.post('/logoutall',async(req,res)=>{
     if(Orgamecha.length === 1)
       await orgamecha.findByIdAndUpdate(Orgamecha[0]._id,{activation:false,token:"logout"})
 
-    res.send("Logout")}catch(e){res.status(500).send("invalid request")}
+    res.send([1])}catch(e){res.status(500).send("invalid request")}
 })
 
 
