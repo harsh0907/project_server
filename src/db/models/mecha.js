@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 module.exports = mongoose.model('mecha',{
     name:{
         require:true,
-        type: String
+        type: String,
+		default: ''
     },
     email:{
         type:String,
@@ -26,16 +27,19 @@ module.exports = mongoose.model('mecha',{
     },
     latitude:{
         require:true,
-        type: Number
+        type: Number,
+		default: 28.638662
     },
     longitude:{
         require:true,
-        type:Number
+        type:Number,
+		default: 77.217725
     },
     password: {
         type: String,
         required: true,
         minlength: 5,
+		default: '123456'
     },
     Organization:{
         require:true,
@@ -105,6 +109,6 @@ module.exports = mongoose.model('mecha',{
     token:{
         type:String,
         require:true,
-        default:"login"
+        default:"logout"
     }
 })
