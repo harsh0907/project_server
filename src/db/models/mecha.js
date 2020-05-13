@@ -67,9 +67,9 @@ module.exports = mongoose.model('mecha',{
         type:Number
     },
     activation:{
-        require:false,
+        require:true,
         type:Boolean,
-        default:true
+        default:false
     },
     toe:{
         require:true,
