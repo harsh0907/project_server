@@ -116,9 +116,10 @@ app.post('/logout',async(req,res)=>{
 
 
 app.post('/admin/login',async(req,res)=>{
+	const {email, password} = req.body
     try{var op = [1]
     var sta = 200
-    const Admin = await admin.find(req.body)
+    const Admin = await admin.find({email,password})
     if(Admin.length ===0 )
       {op=[0]}  
      res.status(sta).send(op)}catch(e){res.status(500).send("error")}   
