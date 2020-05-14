@@ -709,7 +709,7 @@ app.post('/cust/selectmecha',async(req,res)=>{
              "typeofvehicle":type,
              "longitude":longitude,
              "latitude":latitude,
-             "originalamount": 1,
+             "originalamount": parseInt(price[0]),
 			 address,
 			 toe,
          }
