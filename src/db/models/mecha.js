@@ -59,7 +59,7 @@ module.exports = mongoose.model('mecha',{
     upiId:{
        require:true,
        type:String,
-	   default:'',
+	   default:'example@bank',
     },
     chargingfee:{
         require:true,
