@@ -17,7 +17,7 @@ app.use(express.json())
 
 // some important constant
 const map = new Map()
-const price = [0]
+const price = ['0']
 
 
 
